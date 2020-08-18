@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: Application/json
 
 {
-    "title": "Mualiman toisiksi paras bolgi",
-    "author": "Erkki Testimaa (sama)",
-    "url": "http://mualiman-toisiksi-paras-bolgi.com",
-    "likes": 500
+    "title": "Mualiman kolomaniks paras bolgi",
+    "author": "Pena Kaalipelto",
+    "url": "http://mualiman-kolomaniks-paras-bolgi.com",
+    "likes": 50
 }
