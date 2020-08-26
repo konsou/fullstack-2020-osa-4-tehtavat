@@ -4,7 +4,7 @@
   "description": "Fullstack 2020 -kurssin tehtävä",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/konsou/fullstack-2020-osa-4-tehtavat#readme",
   "devDependencies": {
     "eslint": "^7.7.0",
+    "jest": "^26.4.2",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
@@ -27,5 +28,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
