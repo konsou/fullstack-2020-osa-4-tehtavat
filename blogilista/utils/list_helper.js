@@ -22,7 +22,7 @@ const favouriteBlog = (blogs) => {
 
 const mostBlogs = (blogs) => {
     if (blogs.length === 0) return null
-    
+
     const authors = lodash.countBy(blogs, 'author')
     const authorWithMostBlogs = lodash.max(Object.keys(authors), o => authors[o])
 
@@ -32,9 +32,31 @@ const mostBlogs = (blogs) => {
     }
 }
 
+const mostLikes = (blogs) => {
+    if (blogs.length === 0) return null
+
+    const authorLikes = {}
+
+    blogs.forEach((blog) => {
+        if (blog.author in authorLikes){
+            authorLikes[blog.author] += blog.likes
+        } else {
+            authorLikes[blog.author] = blog.likes
+        }
+    })
+
+    const mostLikedAuthor = lodash.maxBy(lodash.keys(authorLikes), o => authorLikes[o])
+
+    return {
+        author: mostLikedAuthor,
+        likes: authorLikes[mostLikedAuthor]
+    }
+}
+
 module.exports = {
     dummy,
     totalLikes,
     favouriteBlog,
     mostBlogs,
+    mostLikes,
 }
