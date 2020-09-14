@@ -6,7 +6,7 @@ const Blog = require('../models/blog')
 
 const api = supertest(app)
 
-const initialBlogs = require('./list_with_many_blogs.json')
+const initialBlogs = helper.manyBlogs
 
 beforeEach(async () => {
     await Blog.deleteMany({})
@@ -36,6 +36,37 @@ describe('fetching notes', () => {
         // todo
     })
     */
+})
+
+describe('adding a new note', () => {
+    test('added note returned as json', async () => {
+        await api
+            .post('/api/blogs', helper.addTestBlog)
+            .expect(201)
+            .expect('Content-Type', /application\/json/)
+    }),
+    test('amount of blogs is increased by one', async () => {
+        const initialBlogs = await helper.blogsInDb()
+        await helper.addNewBlog()
+        const blogsAfter = await helper.blogsInDb()
+
+        expect(blogsAfter.length).toBe(initialBlogs.length + 1)
+    }),
+    test('added blog has correct content', async () => {
+        await helper.addNewBlog()
+        const blogsAfterAdding = await helper.blogsInDb()
+
+        const titles = blogsAfterAdding.map(blog => blog.title)
+        const authors = blogsAfterAdding.map(blog => blog.author)
+        const urls = blogsAfterAdding.map(blog => blog.url)
+        const likes = blogsAfterAdding.map(blog => blog.likes)
+
+        expect(titles).toContain(helper.addTestBlog.title)
+        expect(authors).toContain(helper.addTestBlog.author)
+        expect(urls).toContain(helper.addTestBlog.url)
+        expect(likes).toContain(helper.addTestBlog.likes)
+        
+    })
 })
 
 afterAll(() => {
