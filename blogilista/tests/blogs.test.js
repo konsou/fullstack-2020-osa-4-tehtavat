@@ -23,6 +23,13 @@ describe('fetching notes', () => {
     test('number of notes in db matches with initial notes', async () => {
         const blogsInDb = await helper.blogsInDb()
         expect(blogsInDb).toHaveLength(initialBlogs.length)
+    }),
+    test('id field is defined', async () => {
+        const blogsInDb = await helper.blogsInDb()
+
+        for (const blog of blogsInDb) {
+            expect(blog.id).toBeDefined()
+        }
     })
     /*
     test('fetched note contents match initial note contents', async () => {
