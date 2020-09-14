@@ -23,11 +23,12 @@ describe('fetching notes', () => {
     test('number of notes in db matches with initial notes', async () => {
         const blogsInDb = await helper.blogsInDb()
         expect(blogsInDb).toHaveLength(initialBlogs.length)
-    }),
-    test('fetched note contents match initial note contents', async () => {
-        // TODO
-
     })
+    /*
+    test('fetched note contents match initial note contents', async () => {
+        // todo
+    })
+    */
 })
 
 afterAll(() => {
