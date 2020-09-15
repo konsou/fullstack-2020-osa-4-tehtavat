@@ -7,19 +7,29 @@ const addTestBlog = {
     'url': 'http://mualiman-kolomaniks-paras-bolgi.com',
     'likes': 50,
 }
+const blogWithoutLikesDefined = {
+    'title': 'Can a blog survive without likes?',
+    'author': 'John Cedars',
+    'url': 'http://google.com/blogs/nolikes',
+}
 
 const blogsInDb = async () => {
     const notes = await Blog.find({})
     return notes.map(note => note.toJSON())
 }
 
-const addNewBlog = async () => {
-    const newBlog = Blog(addTestBlog)
+const addNewBlog = async (blog) => {
+    let newBlog
+    if (blog){
+        newBlog = Blog(blog)
+    } else {
+        newBlog = Blog(addTestBlog)
+    }
 
     const response = await newBlog.save()
     return response
 }
 
 module.exports = {
-    blogsInDb, addNewBlog, manyBlogs, addTestBlog
+    blogsInDb, addNewBlog, manyBlogs, addTestBlog, blogWithoutLikesDefined
 }

@@ -65,7 +65,10 @@ describe('adding a new note', () => {
         expect(authors).toContain(helper.addTestBlog.author)
         expect(urls).toContain(helper.addTestBlog.url)
         expect(likes).toContain(helper.addTestBlog.likes)
-        
+    }),
+    test('blog without likes defined is given 0 likes', async () => {
+        const addedBlog = await helper.addNewBlog(helper.blogWithoutLikesDefined)
+        expect(addedBlog.likes).toBe(0)
     })
 })
 
