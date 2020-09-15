@@ -12,6 +12,16 @@ const blogWithoutLikesDefined = {
     'author': 'John Cedars',
     'url': 'http://google.com/blogs/nolikes',
 }
+const blogWithoutTitle = {
+    author: 'Jeba Jee',
+    url: 'http://jebajeejee.com?blogs=123',
+    likes: 4
+}
+const blogWithoutUrl = {
+    title: 'I Don\'t Believe In URLs',
+    author: 'Pauli Isomäki',
+    likes: 2
+}
 
 const blogsInDb = async () => {
     const notes = await Blog.find({})
@@ -31,5 +41,11 @@ const addNewBlog = async (blog) => {
 }
 
 module.exports = {
-    blogsInDb, addNewBlog, manyBlogs, addTestBlog, blogWithoutLikesDefined
+    blogsInDb, 
+    addNewBlog, 
+    manyBlogs, 
+    addTestBlog, 
+    blogWithoutLikesDefined, 
+    blogWithoutTitle,
+    blogWithoutUrl,
 }

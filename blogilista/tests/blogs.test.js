@@ -40,8 +40,11 @@ describe('fetching notes', () => {
 
 describe('adding a new note', () => {
     test('added note returned as json', async () => {
+        // TODO: BROKEN!
+        const testBlog = helper.addTestBlog
+        console.log(testBlog)
         await api
-            .post('/api/blogs', helper.addTestBlog)
+            .post('/api/blogs', testBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
     }),
@@ -69,6 +72,14 @@ describe('adding a new note', () => {
     test('blog without likes defined is given 0 likes', async () => {
         const addedBlog = await helper.addNewBlog(helper.blogWithoutLikesDefined)
         expect(addedBlog.likes).toBe(0)
+    }),
+    test('API should reject blogs without title or url', async () => {
+        await api
+            .post('/api/blogs', helper.blogWithoutTitle)
+            .expect(400)
+        await api
+            .post('/api/blogs', helper.blogWithoutUrl)
+            .expect(400)
     })
 })
 
