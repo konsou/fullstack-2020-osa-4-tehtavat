@@ -39,11 +39,18 @@ describe('fetching notes', () => {
 })
 
 describe('adding a new note', () => {
-    test('added note returned as json', async () => {
+    test('added note returned as json and correct contents', async () => {
         await api
-            .post('/api/blogs', helper.addTestBlog)
+            .post('/api/blogs')
+            .send(helper.addTestBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
+            .then(response => {
+                expect(response.body.title).toEqual(helper.addTestBlog.title)
+                expect(response.body.author).toEqual(helper.addTestBlog.author)
+                expect(response.body.url).toEqual(helper.addTestBlog.url)
+                expect(response.body.likes).toEqual(helper.addTestBlog.likes)
+            })
     }),
     test('amount of blogs is increased by one', async () => {
         const initialBlogs = await helper.blogsInDb()
