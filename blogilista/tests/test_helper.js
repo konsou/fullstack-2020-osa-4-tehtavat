@@ -31,5 +31,11 @@ const addNewBlog = async (blog) => {
 }
 
 module.exports = {
-    blogsInDb, addNewBlog, manyBlogs, addTestBlog, blogWithoutLikesDefined
+    blogsInDb, 
+    addNewBlog, 
+    manyBlogs, 
+    addTestBlog, 
+    blogWithoutLikesDefined, 
+    blogWithoutTitle,
+    blogWithoutUrl,
 }
