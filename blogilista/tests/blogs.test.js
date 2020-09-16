@@ -78,15 +78,21 @@ describe('adding a new note', () => {
         expect(addedBlog.likes).toBe(0)
     }),
     test('adding blog without title or url should be rejected', async () => {
-        const blogWithoutTitle = Object.assign({}, helper.addTestBlog)
+        const blogWithoutTitle = { ...helper.addTestBlog }
         delete blogWithoutTitle.title
 
+        const blogWithoutUrl = { ...helper.addTestBlog }
+        delete blogWithoutUrl.url
+
         await api
-            .post('/api/blogs', blogWithoutTitle)
+            .post('/api/blogs')
+            .send(blogWithoutTitle)
             .expect(400)
 
-
-
+        await api
+            .post('/api/blogs')
+            .send(blogWithoutUrl)
+            .expect(400)
     })
 })
 
