@@ -36,6 +36,4 @@ module.exports = {
     manyBlogs, 
     addTestBlog, 
     blogWithoutLikesDefined, 
-    blogWithoutTitle,
-    blogWithoutUrl,
 }
