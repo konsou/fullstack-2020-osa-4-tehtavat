@@ -8,6 +8,8 @@ const api = supertest(app)
 
 const initialBlogs = helper.manyBlogs
 
+jest.setTimeout(10000)
+
 beforeEach(async () => {
     await Blog.deleteMany({})
     await Blog.insertMany(initialBlogs)
@@ -113,6 +115,22 @@ describe('deleting a blog', () => {
         const titles = blogsAfterDelete.map(r => r.title)
 
         expect(titles).not.toContain(blogToDelete.title)
+    })
+    test('deleting a nonexisting blog should return 404', async () => {
+        const blogsAtStart = await helper.blogsInDb()
+
+        const blogToDelete = blogsAtStart[0]
+        await Blog.deleteOne({ '_id': blogToDelete.id })
+
+        await api
+            .delete(`/api/blogs/${blogToDelete.id}`)
+            .expect(404)
+    })
+    test('malformed id should return 400', async () => {
+        const invalidId = 'eivgy8gy'
+        await api
+            .delete(`/api/blogs/${invalidId}`)
+            .expect(400)
     })
 })
 

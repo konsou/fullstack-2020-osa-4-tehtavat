@@ -17,4 +17,16 @@ blogsRouter.post('/', async (request, response) => {
     }
 })
 
+blogsRouter.delete('/:id', async (request, response) => {
+    console.log(request.params)
+    try {
+        const result = await Blog.deleteOne({ '_id': request.params.id })
+        result.deletedCount
+            ? response.status(204).end()
+            : response.status(404).end()
+    } catch (error) {
+        response.status(400).json({error: 'malformed id'})
+    }
+})
+
 module.exports = blogsRouter
