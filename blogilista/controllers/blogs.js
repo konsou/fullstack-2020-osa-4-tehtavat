@@ -18,7 +18,6 @@ blogsRouter.post('/', async (request, response) => {
 })
 
 blogsRouter.delete('/:id', async (request, response) => {
-    console.log(request.params)
     try {
         const result = await Blog.deleteOne({ '_id': request.params.id })
         result.deletedCount
@@ -26,6 +25,25 @@ blogsRouter.delete('/:id', async (request, response) => {
             : response.status(404).end()
     } catch (error) {
         response.status(400).json({error: 'malformed id'})
+    }
+})
+
+blogsRouter.put('/:id', async (request, response) => {
+    console.log(request.body)
+    try {
+        const result = await Blog.replaceOne(
+            { '_id': request.params.id },
+            request.body
+        )
+
+        console.log(result)
+
+        result.nModified
+            ? response.status(204).end()
+            : response.status(404).end()
+
+    } catch (error) {
+        response.status(400).json({ error: 'malformed request' })
     }
 })
 
