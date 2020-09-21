@@ -134,6 +134,31 @@ describe('deleting a blog', () => {
     })
 })
 
+describe('updating a blog', () => {
+    test('updating a blog succeeds with code 204', async () => {
+        const blogsAtStart = await helper.blogsInDb()
+        const modifiedBlog = { 
+            id: blogsAtStart[0].id,
+            title: 'This title has been modified',
+            author: 'This author has been modified',
+            url: 'http://This_url_has_been_modified.co.uk',
+            likes: 2834719234876,
+        }
+
+        await api
+            .put(`/api/blogs/${modifiedBlog.id}`)
+            .send(modifiedBlog)
+            .expect(204)
+
+        const updatedBlogFromDb = await Blog.findById(modifiedBlog.id)
+
+        expect(updatedBlogFromDb.title).toEqual(modifiedBlog.title)
+        expect(updatedBlogFromDb.author).toEqual(modifiedBlog.author)
+        expect(updatedBlogFromDb.url).toEqual(modifiedBlog.url)
+        expect(updatedBlogFromDb.likes).toEqual(modifiedBlog.likes)
+    })
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
