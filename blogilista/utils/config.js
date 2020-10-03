@@ -11,7 +11,10 @@ if (process.env.NODE_ENV === 'test') {
 
 let MONGO_URL = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@fullstack2020-bysw0.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
 
+const PASSWORD_SALT_ROUNDS = 10
+
 module.exports = {
     PORT,
-    MONGO_URL
+    MONGO_URL,
+    PASSWORD_SALT_ROUNDS,
 }
