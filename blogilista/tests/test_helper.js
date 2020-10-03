@@ -1,4 +1,6 @@
 const Blog = require('../models/blog')
+const User = require('../models/user')
+
 
 const manyBlogs = require('./list_with_many_blogs.json')
 const addTestBlog = {
@@ -12,6 +14,20 @@ const blogWithoutLikesDefined = {
     'author': 'John Cedars',
     'url': 'http://google.com/blogs/nolikes',
 }
+
+const initialUsers = [
+    {
+        username: 'root',
+        name: 'The Owner Of Everything',
+        password: 'rootpass',
+    },
+    {
+        username: 'konso',
+        name: 'Tomi Javanainen',
+        password: '1234',
+    }
+]
+
 
 const blogsInDb = async () => {
     const notes = await Blog.find({})
@@ -30,10 +46,17 @@ const addNewBlog = async (blog) => {
     return response
 }
 
+const usersInDb = async () => {
+    const users = await User.find({})
+    return users.map(note => note.toJSON())
+}
+
 module.exports = {
     blogsInDb, 
     addNewBlog, 
     manyBlogs, 
     addTestBlog, 
-    blogWithoutLikesDefined, 
+    blogWithoutLikesDefined,
+    initialUsers,
+    usersInDb,
 }
