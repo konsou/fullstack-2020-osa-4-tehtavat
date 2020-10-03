@@ -27,6 +27,11 @@ const initialUsers = [
         password: '1234',
     }
 ]
+const addTestUser = {
+    username: 'testUser',
+    name: 'Hi I\'m a test user',
+    password: '4oi3ughogho4g539',
+}
 
 
 const blogsInDb = async () => {
@@ -59,4 +64,5 @@ module.exports = {
     blogWithoutLikesDefined,
     initialUsers,
     usersInDb,
+    addTestUser,
 }

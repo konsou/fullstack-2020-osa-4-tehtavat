@@ -15,14 +15,14 @@ beforeEach(async () => {
     await Blog.insertMany(initialBlogs)
 })
 
-describe('fetching notes', () => {
-    test('notes returned as json', async () => {
+describe('fetching blogs', () => {
+    test('blogs returned as json', async () => {
         await api
             .get('/api/blogs')
             .expect(200)
             .expect('Content-Type', /application\/json/)
     }),
-    test('number of notes in db matches with initial notes', async () => {
+    test('number of blogs in db matches with initial blogs', async () => {
         const blogsInDb = await helper.blogsInDb()
         expect(blogsInDb).toHaveLength(initialBlogs.length)
     }),
@@ -40,8 +40,8 @@ describe('fetching notes', () => {
     */
 })
 
-describe('adding a new note', () => {
-    test('added note returned as json and correct contents', async () => {
+describe('adding a new blog', () => {
+    test('added blog returned as json and correct contents', async () => {
         await api
             .post('/api/blogs')
             .send(helper.addTestBlog)

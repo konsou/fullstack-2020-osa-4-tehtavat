@@ -50,29 +50,26 @@ describe('fetching users', () => {
     })
 })
 
-/*
-
-describe('adding a new note', () => {
-    test('added note returned as json and correct contents', async () => {
-        await api
-            .post('/api/blogs')
-            .send(helper.addTestBlog)
+describe('adding a new user', () => {
+    test('added user returned as json and correct contents', async () => {
+        const response = await api
+            .post('/api/users')
+            .send(helper.addTestUser)
             .expect(201)
             .expect('Content-Type', /application\/json/)
-            .then(response => {
-                expect(response.body.title).toEqual(helper.addTestBlog.title)
-                expect(response.body.author).toEqual(helper.addTestBlog.author)
-                expect(response.body.url).toEqual(helper.addTestBlog.url)
-                expect(response.body.likes).toEqual(helper.addTestBlog.likes)
-            })
-    }),
+
+        expect(response.body.username).toEqual(helper.addTestUser.username)
+        expect(response.body.name).toEqual(helper.addTestUser.name)
+        expect(response.body.id).toBeDefined()
+    })
+    /*
     test('amount of blogs is increased by one', async () => {
         const initialBlogs = await helper.blogsInDb()
         await helper.addNewBlog()
         const blogsAfter = await helper.blogsInDb()
 
         expect(blogsAfter.length).toBe(initialBlogs.length + 1)
-    }),
+    })
     test('added blog has correct content', async () => {
         await helper.addNewBlog()
         const blogsAfterAdding = await helper.blogsInDb()
@@ -108,8 +105,10 @@ describe('adding a new note', () => {
             .send(blogWithoutUrl)
             .expect(400)
     })
+    */
 })
 
+/*
 describe('deleting a blog', () => {
     test('deleting a valid blog succeeds and returns status code 204', async () => {
         const blogsAtStart = await helper.blogsInDb()
